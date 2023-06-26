@@ -34,24 +34,22 @@ tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM ctrl_combo[] = {KC_A, KC_S, COMBO_END};
 const uint16_t PROGMEM alt_combo[] = {KC_A, KC_D, COMBO_END};
 const uint16_t PROGMEM ctrlshft_combo[] = {KC_A, KC_W, COMBO_END};
-const uint16_t PROGMEM super_combo[] = {KC_A, KC_X, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(ctrl_combo, KC_LCTL),
     COMBO(alt_combo, KC_LALT),
     COMBO(ctrlshft_combo, LCTL(KC_LSFT)),
-    COMBO(super_combo, KC_LGUI),
 };
 
 // END Combos
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [0] = LAYOUT_ortho_5x15( // Default layer
-    KC_ESC,               KC_1,    KC_2,    KC_3,    KC_4,     KC_5,    KC_PGUP, TO(1),   KC_PGDN, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
-    KC_TAB,               KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,    KC_7,    KC_8,    KC_9,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_HOME,
-    MT(MOD_LCTL, KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,     KC_G,    KC_4,    KC_5,    KC_6,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT(4, KC_NUBS),
-    KC_LSFT,              KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,    KC_1,    KC_2,    KC_3,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_QUOT,
-    TD(TD_CAPEND),        KC_LGUI, KC_LALT, OSL(2),  OSL(1),   KC_SPC,  KC_GRV,  KC_0,    KC_PDOT, KC_BSPC, KC_ENT,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_ESC,               KC_1,    KC_2,    KC_3,    KC_4,     KC_5,    KC_PGUP,               TO(1),   KC_PGDN, KC_6,                  KC_7,           KC_8,    KC_9,    KC_0,    KC_HOME,
+    KC_GRV,               KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,    KC_7,                  KC_8,    KC_9,    KC_Y,                  KC_U,           KC_I,    KC_O,    KC_P,    KC_END,
+    MT(MOD_LCTL, KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,     KC_G,    KC_4,                  KC_5,    KC_6,    KC_H,                  KC_J,           KC_K,    KC_L,    KC_SCLN, LT(4, KC_NUBS),
+    KC_LSFT,              KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,    KC_1,                  KC_2,    KC_3,    KC_N,                  KC_M,           KC_COMM, KC_DOT,  KC_SLSH, KC_QUOT,
+    TD(TD_CAPEND),        KC_LGUI, KC_LALT, OSL(2),  OSL(1),   KC_SPC,  MT(MOD_LGUI, KC_TAB),  KC_0,    KC_DEL,  MT(MOD_LSFT, KC_BSPC), LT(3, KC_ENT),  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
   ),
  [1] = LAYOUT_ortho_5x15(// Numpad, shifted keys ( (), {}, [], <>, FN Keys, screen switching )
     KC_TRNS,              KC_F1,   KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_TRNS, TO(2),   KC_TRNS, KC_F6,   KC_F7,      KC_F8,      KC_F9,      KC_F10,  KC_F11,
@@ -69,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ),
  [3] = LAYOUT_ortho_5x15( // Nothing at the moment
     KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, RGB_RMOD,    KC_TRNS, RGB_MOD,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,              KC_1,    KC_2,    KC_3,    KC_4,     KC_5,    KC_TRNS,     KC_TRNS, KC_TRNS,     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_TRNS,
     KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,              KC_TRNS, KC_TRNS, TO(0),   TO(2),    KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS,     KC_TRNS, KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
