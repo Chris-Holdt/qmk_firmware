@@ -36,9 +36,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|---------------+--------+--------+--------+--------+--------|                                |--------+--------+--------+--------+--------+----------------|
       CTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                     KC_H,    KC_J,    KC_K,    KC_L,  KC_SCLN,  LT(3, KC_NUBS),
   //|---------------+--------+--------+--------+--------+--------|                                |--------+--------+--------+--------+--------+----------------|
-      SFT_T(KC_GRV),   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                     KC_N,    KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_QUOT,
+      KC_LSFT,         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                     KC_N,    KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_QUOT,
   //|---------------+--------+--------+--------+--------+--------+-----------|           |--------+--------+--------+--------+--------+--------+----------------|
-                                                        TT(4), TT(2), KC_SPC,             SFT_T(KC_BSPC), LT(1, KC_ENT), KC_LGUI
+                                                        LT(4, KC_GRV), TT(2), KC_SPC,             SFT_T(KC_BSPC), LT(1, KC_ENT), KC_LGUI
                                                      //`---------------------'           `--------------------------------------'
 
   ),
@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+---------|                    |--------+--------+--------+--------+--------+--------|
       KC_TRNS, KC_CIRC, KC_0,    KC_DLR,  KC_PERC, KC_TRNS,                      KC_LEFT, KC_DOWN,  KC_UP,   KC_RIGHT, KC_TRNS,KC_TRNS,
   //|--------+--------+--------+--------+--------+---------|                    |--------+--------+--------+--------+--------+--------|
-      KC_TRNS, KC_EXLM, KC_DQT,  S(KC_3), KC_DLR,  KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_EXLM, S(KC_2),  S(KC_3), KC_DLR,  KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_TRNS, KC_TRNS, KC_TRNS,
   //|--------+--------+--------+--------+--------+---------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_TRNS, TO(0),  KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS
                                       //`--------------------------'  `--------------------------'
