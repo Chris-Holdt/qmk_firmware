@@ -31,8 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define QUICK_TAP_TERM 0
 //#define TAPPING_TERM 100
 
-#define TAPPING_TERM 200
-#define COMBO_TERM 90
+#define TAPPING_TERM 100
+#define COMBO_TERM 50
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING

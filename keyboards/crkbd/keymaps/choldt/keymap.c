@@ -19,14 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 // Define combos
-// const uint16_t PROGMEM ctrl_combo[] = {KC_A, KC_S, COMBO_END};
 const uint16_t PROGMEM alt_combo[] = {KC_A, KC_D, COMBO_END};
-// const uint16_t PROGMEM ctrlshft_combo[] = {KC_A, KC_W, COMBO_END};
+const uint16_t PROGMEM change_workspace_combo[] = {KC_F, KC_J, COMBO_END};
 
 combo_t key_combos[] = {
-    // COMBO(ctrl_combo, KC_LCTL),
     COMBO(alt_combo, KC_LALT),
-    // COMBO(ctrlshft_combo, LCTL(KC_LSFT)),
+    COMBO(change_workspace_combo, OSL(5))
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -37,9 +35,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       CTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                     KC_H,    KC_J,    KC_K,    KC_L,  KC_SCLN,  LT(3, KC_NUBS),
   //|---------------+--------+--------+--------+--------+--------|                                |--------+--------+--------+--------+--------+----------------|
       KC_LSFT,         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                     KC_N,    KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_QUOT,
-  //|---------------+--------+--------+--------+--------+--------+-----------|           |--------+--------+--------+--------+--------+--------+----------------|
-                                                        LT(4, KC_GRV), TT(2), KC_SPC,             SFT_T(KC_BSPC), LT(1, KC_ENT), KC_LGUI
-                                                     //`---------------------'           `--------------------------------------'
+  //|---------------+--------+--------+--------+--------+--------+-------------|    |-------------+--------+--------+--------+--------+--------+----------------|
+                                                  LT(4, KC_GRV), TT(2), KC_SPC,      SFT_T(KC_BSPC), LT(1, KC_ENT), KC_LGUI
+                                             //`-------------------------------'    `--------------------------------------'
 
   ),
 
@@ -57,15 +55,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
     [2] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_TRNS, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), CM_TOGG,         KC_TRNS, LGUI(KC_E), LGUI(KC_W), LGUI(KC_R), KC_TRNS, KC_TRNS,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_LPRN, KC_LCBR, KC_LBRC,                      KC_RBRC,  KC_RCBR, KC_RPRN, KC_NUHS, KC_TRNS,  KC_TRNS,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_GRV, KC_MINS, KC_UNDS,                      KC_EQL, KC_PLUS, KC_LT, KC_GT, KC_TRNS, KC_TRNS,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS,   TO(0),  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS
-                                      //`--------------------------'  `--------------------------'
+  //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
+      KC_TRNS,   LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_5),                       KC_TRNS,  LGUI(KC_E),  LGUI(KC_W),  LGUI(KC_R),  KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      CM_TOGG,    KC_TRNS,     KC_TRNS,     KC_LPRN,     KC_LCBR,     KC_LBRC,                        KC_RBRC,  KC_RCBR,     KC_RPRN,     KC_NUHS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_GRV,      KC_MINS,     KC_UNDS,                        KC_EQL,   KC_PLUS,     KC_LT,       KC_GT,       KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------+---------| |--------+---------+------------+------------+---------+--------+--------|
+                                                         KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
+                                                    //`----------------------------------' `--------------------------------'
   ),
 
     [3] = LAYOUT_split_3x6_3(
@@ -91,5 +89,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_TRNS, TO(0),  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS
                                       //`--------------------------'  `--------------------------'
+  ),
+
+    [5] = LAYOUT_split_3x6_3(
+  //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
+      KC_TRNS,   LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_5),                       LGUI(KC_6),  LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),  KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,      KC_TRNS,     KC_TRNS,                       KC_TRNS,     KC_TRNS,     KC_TRNS,  KC_TRNS,       KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------+---------| |--------+---------+------------+------------+---------+--------+--------|
+                                                         KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
+                                                    //`----------------------------------' `--------------------------------'
   )
 };
