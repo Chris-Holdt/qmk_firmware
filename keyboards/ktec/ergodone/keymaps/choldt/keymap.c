@@ -1,10 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
-enum custom_keycodes {
-  VRSN = SAFE_RANGE,
-};
-
 // Define combos
 const uint16_t PROGMEM alt_combo[] = {KC_A, KC_D, COMBO_END};
 const uint16_t PROGMEM change_workspace_combo[] = {KC_F, KC_J, COMBO_END};
@@ -41,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
         KC_EQL,         KC_1,         KC_2,     KC_3,    KC_4,    KC_5,   KC_LEFT,
-        KC_TAB,         KC_Q,         KC_W,     KC_E,    KC_R,    KC_T,   TG(SYMB),
+        KC_TAB,         KC_Q,         KC_W,     KC_E,    KC_R,    KC_T,   TG(1),
         CTL_T(KC_ESC),  KC_A,         KC_S,     KC_D,    KC_F,    KC_G,
         KC_LSFT,        KC_Z,         KC_X,     KC_C,    KC_V,    KC_B,   ALL_T(KC_NO),
                         KC_TRNS,      KC_TRNS,  KC_TRNS, KC_TRNS, MO(2),
@@ -53,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     KC_TRNS, KC_Y,   KC_U,             KC_I,    KC_O,    KC_P,      KC_BSLS,
                              KC_H,   KC_J,             KC_K,    KC_L,    KC_SCLN,   LT(3, KC_NUBS),
                     KC_TRNS, KC_N,   KC_M,             KC_COMM, KC_DOT,  KC_SLSH,   KC_QUOT,
-                                     KC_LT(1, KC_ENT), KC_LGUI, KC_TRNS, KC_TRNS,   KC_TRNS,
+                                     LT(1, KC_ENT), KC_LGUI, KC_TRNS, KC_TRNS,   KC_TRNS,
              KC_TRNS, KC_TRNS,
              KC_TRNS,
              KC_TRNS, KC_TRNS, KC_BSPC
@@ -86,17 +82,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_TRNS,
        KC_TRNS,   KC_CIRC, KC_0,    KC_DLR,  KC_PERC, KC_TRNS, KC_TRNS,
        KC_TRNS,   KC_EXLM, S(KC_2), S(KC_3), KC_DLR,  KC_PERC,
-       KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                                                 KC_TRNS, KC_TRNS,
                                                                          KC_TRNS,
                                                        KC_TRNS, KC_TRNS, KC_TRNS,
        // right hand
                   KC_TRNS, KC_F6,   KC_F7,   KC_F8,    KC_F9,    KC_F10,  KC_F11,
-                  KC_TRNS, KC_6,    KC_7,    KC_8,     KC_9,     KC_10,   KC_TRNS,
+                  KC_TRNS, KC_6,    KC_7,    KC_8,     KC_9,     KC_0,    KC_TRNS,
                   KC_TRNS, KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT, KC_TRNS, KC_TRNS,
                            KC_CIRC, KC_AMPR, KC_ASTR,  KC_TRNS,  KC_TRNS, KC_TRNS,
-                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,
                                     KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
@@ -203,40 +197,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case VRSN:
-      if (record->event.pressed) {
-        SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-      }
-      return false;
-  }
-  return true;
-}
-
-bool led_update_user(led_t led_state) {
-    // stub any kb level behaviour
-    return false;
-}
-
-// Runs constantly in the background, in a loop.
-void matrix_scan_user(void) {
-    ergodox_board_led_off();
-    ergodox_right_led_1_off();
-    ergodox_right_led_2_off();
-    ergodox_right_led_3_off();
-
-    switch (get_highest_layer(layer_state)) {
-      // TODO: Make this relevant to the ErgoDox EZ.
-        case 1:
-            ergodox_right_led_1_on();
-            break;
-        case 2:
-            ergodox_right_led_2_on();
-            break;
-        default:
-            // none
-            break;
-    }
-
-};
