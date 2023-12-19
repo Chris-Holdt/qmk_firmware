@@ -83,7 +83,7 @@ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, VS_BM_CLEARALL,                    
                                         KC_TRNS,  VS_DEL_LEFT, VS_DEL_RIGHT,                VS_DEL_LINE, VS_JUMPY, VS_COMMANDS
                                       //`--------------------------'            `--------------------------'
   ),
-  
+
   [COMBINED] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
     KC_TILD,   KC_EXLM, KC_AT,   KC_HASH, KC_DLR, KC_PERC,                        KC_PLUS,   KC_7,  KC_8,   KC_9,  KC_ASTR,  KC_PIPE,
@@ -149,7 +149,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   // return rotation;
   return OLED_ROTATION_180;
 }
-  
+
 
 #define DISPLAY_LAYER_NAME(LAYER_NAME, LAYER_STRING) \
   if(get_highest_layer(layer_state) == LAYER_NAME) { \
@@ -235,16 +235,16 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 
     rgblight_set_layer_state(1, layer_state_cmp(state, KEYNAV));
-    rgblight_set_layer_state(2, layer_state_cmp(state, KEYSEL));    
+    rgblight_set_layer_state(2, layer_state_cmp(state, KEYSEL));
 
-    
-    rgblight_set_layer_state(3, layer_state_cmp(state, SHELL_NAV));    
+
+    rgblight_set_layer_state(3, layer_state_cmp(state, SHELL_NAV));
     rgblight_set_layer_state(4, layer_state_cmp(state, SHELL_SCREEN));
-    
+
     rgblight_set_layer_state(5, layer_state_cmp(state, SHORTCUTS));
-    
+
     rgblight_set_layer_state(6, layer_state_cmp(state, VSCODE));
-    
+
     return state;
 }
 
@@ -270,10 +270,9 @@ void render_bootmagic_status(bool status) {
 
 void oled_render_logo(void) {
     static const char PROGMEM crkbd_logo[] = {
-        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
-        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
-        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
-        0};
+        153,154,10,
+        185,186,0
+    };
     oled_write_P(crkbd_logo, false);
 }
 

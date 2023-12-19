@@ -22,6 +22,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const uint16_t PROGMEM alt_combo[] = {KC_A, KC_D, COMBO_END};
 const uint16_t PROGMEM change_workspace_combo[] = {KC_F, KC_J, COMBO_END};
 
+// Tap dance dfinitions
+enum {
+    TD_MS,
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_MS] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_LGUI, 6)
+};
+
 combo_t key_combos[] = {
     COMBO(alt_combo, KC_LALT),
     COMBO(change_workspace_combo, OSL(5))
@@ -34,9 +43,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|---------------+--------+--------+--------+--------+--------|                                |--------+--------+--------+--------+--------+----------------|
       CTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                     KC_H,    KC_J,    KC_K,    KC_L,  KC_SCLN,  LT(3, KC_NUBS),
   //|---------------+--------+--------+--------+--------+--------|                                |--------+--------+--------+--------+--------+----------------|
-      KC_LSFT,         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                     KC_N,    KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_QUOT,
+      KC_LSFT,       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                     KC_N,    KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_QUOT,
   //|---------------+--------+--------+--------+--------+--------+-------------|    |-------------+--------+--------+--------+--------+--------+----------------|
-                                                  LT(4, KC_GRV), TT(2), KC_SPC,      SFT_T(KC_BSPC), LT(1, KC_ENT), KC_LGUI
+                                                  LT(4, KC_GRV), TT(2), KC_SPC,      SFT_T(KC_BSPC), LT(1, KC_ENT), TD(TD_MS)
                                              //`-------------------------------'    `--------------------------------------'
 
   ),
@@ -54,9 +63,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-    [2] = LAYOUT_split_3x6_3(
+    [2] = LAYOUT_split_3x6_3( // Programming symbols. Left Q-T workspace 1-5. Right U, I, O: switch to screen left, middle, right
   //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
-      KC_TRNS,   LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_5),                       KC_TRNS,  LGUI(KC_E),  LGUI(KC_W),  LGUI(KC_R),  KC_TRNS, KC_TRNS,
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,  LGUI(KC_E),  LGUI(KC_W),  LGUI(KC_R),  KC_TRNS, KC_TRNS,
   //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
       CM_TOGG,    KC_TRNS,     KC_TRNS,     KC_LPRN,     KC_LCBR,     KC_LBRC,                        KC_RBRC,  KC_RCBR,     KC_RPRN,     KC_NUHS,     KC_TRNS, KC_TRNS,
   //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
@@ -66,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     //`----------------------------------' `--------------------------------'
   ),
 
-    [3] = LAYOUT_split_3x6_3(
+    [3] = LAYOUT_split_3x6_3( // Boot, Sleep, media control
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       QK_BOOT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -79,19 +88,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 
-    [4] = LAYOUT_split_3x6_3(
+    [4] = LAYOUT_split_3x6_3( // F keys
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_F1,    KC_F2,   KC_F3,   KC_F4,  KC_F5,   KC_F6,                         KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+      KC_TRNS, KC_F1,   KC_F2,   KC_F3,  KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_TRNS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,                       KC_F19,  KC_F20,  KC_F21,  KC_F22,  KC_F23,  KC_F24,
+      KC_TRNS, KC_F12,  KC_F13,  KC_F14, KC_F15,  KC_F16,                       KC_F17,  KC_F18,  KC_F19,  KC_F20,  KC_F21,  KC_TRNS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_F22,  KC_F23,  KC_F24, KC_TRNS, KC_TRNS,                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_TRNS, TO(0),  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS
                                       //`--------------------------'  `--------------------------'
   ),
 
-    [5] = LAYOUT_split_3x6_3(
+    [5] = LAYOUT_split_3x6_3( // Workspace switching
   //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
       KC_TRNS,   LGUI(KC_1),  LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4), LGUI(KC_5),                       LGUI(KC_6),  LGUI(KC_7),  LGUI(KC_8),  LGUI(KC_9),  KC_TRNS, KC_TRNS,
   //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
@@ -101,5 +110,97 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----------+------------+------------+------------+------------+-----------+---------| |--------+---------+------------+------------+---------+--------+--------|
                                                          KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
                                                     //`----------------------------------' `--------------------------------'
+  ),
+
+    [6] = LAYOUT_split_3x6_3( // Mouse
+  //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
+      KC_TRNS,    KC_TRNS,     KC_MS_U,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_MS_L,     KC_MS_D,     KC_MS_R,     KC_TRNS,     KC_TRNS,                        KC_MS_L,     KC_MS_D,     KC_MS_U,     KC_MS_R,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_WH_D,     KC_WH_U,     KC_BTN1,     KC_BTN2,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------+---------| |--------+---------+------------+------------+---------+--------+--------|
+                                                         KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
+                                                    //`----------------------------------' `--------------------------------'
   )
+
+    /* [6] = LAYOUT_split_3x6_3( // Template
+  //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------+---------| |--------+---------+------------+------------+---------+--------+--------|
+                                                         KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
+                                                    //`----------------------------------' `--------------------------------'
+  ) */
 };
+
+#ifdef OLED_ENABLE
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return OLED_ROTATION_270;
+    }
+
+    return rotation;
+}
+
+static void render_layer(void) {
+
+    oled_clear();
+    oled_write_P(PSTR("Layer"), false);
+
+    switch(get_highest_layer(layer_state)) {
+        case 0:
+            oled_write_P(PSTR("Base\n"), false);
+            break;
+
+        case 1:
+            oled_write_P(PSTR("Num & Move\n"), false);
+            break;
+
+        case 2:
+            oled_write_P(PSTR("Code & Monitors\n"), false);
+            break;
+
+        case 3:
+            oled_write_P(PSTR("Controls\n"), false);
+            break;
+
+        case 4:
+            oled_write_P(PSTR("Fn Keys\n"), false);
+            break;
+
+        case 5:
+            oled_write_P(PSTR("Workspace\n"), false);
+            break;
+
+        case 6:
+            oled_write_P(PSTR("Mouse\n"), false);
+            break;
+
+        default:
+            oled_write_ln_P(PSTR("No idea"), false);
+    }
+}
+
+static void render_logo(void) {
+    static const char PROGMEM qmk_logo[] = {
+        153,154,10,
+        185,186,0
+    };
+
+    oled_write_P(qmk_logo, false);
+}
+
+bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+        render_layer();
+    } else {
+        render_logo();
+    }
+
+    return false;
+}
+#endif

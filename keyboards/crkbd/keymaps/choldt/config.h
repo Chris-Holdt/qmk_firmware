@@ -31,8 +31,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define QUICK_TAP_TERM 0
 //#define TAPPING_TERM 100
 
-#define TAPPING_TERM 100
+#define TAPPING_TERM 200
 #define COMBO_TERM 50
+
+#define MOUSEKEY_INTERVAL 10
+#define MOUSEKEY_MAX_SPEED 10
+#define MOUSEKEY_MOVE_DELTA 2
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING
