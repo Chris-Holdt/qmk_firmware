@@ -21,10 +21,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Define combos
 const uint16_t PROGMEM alt_combo[] = {KC_A, KC_D, COMBO_END};
 const uint16_t PROGMEM change_workspace_combo[] = {KC_F, KC_J, COMBO_END};
+const uint16_t PROGMEM zellij_combo[] = {KC_S, KC_F, COMBO_END};
 
 // Tap dance dfinitions
 enum {
     TD_MS,
+};
+
+enum custom_keycodes {
+    MAC_SES_SW = SAFE_RANGE,
 };
 
 tap_dance_action_t tap_dance_actions[] = {
@@ -33,13 +38,14 @@ tap_dance_action_t tap_dance_actions[] = {
 
 combo_t key_combos[] = {
     COMBO(alt_combo, KC_LALT),
-    COMBO(change_workspace_combo, OSL(5))
+    COMBO(change_workspace_combo, OSL(5)),
+    COMBO(zellij_combo, TG(7))
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_split_3x6_3(
   //,-------------------------------------------------------------.                               ,-------------------------------------------------------------.
-      KC_TAB,          KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                     KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_MEH,
+      KC_TAB,          KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                     KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_DEL,
   //|---------------+--------+--------+--------+--------+--------|                                |--------+--------+--------+--------+--------+----------------|
       CTL_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                     KC_H,    KC_J,    KC_K,    KC_L,  KC_SCLN,  LT(3, KC_NUBS),
   //|---------------+--------+--------+--------+--------+--------|                                |--------+--------+--------+--------+--------+----------------|
@@ -63,10 +69,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-    [2] = LAYOUT_split_3x6_3( // Programming symbols. Left Q-T workspace 1-5. Right U, I, O: switch to screen left, middle, right
+    [2] = LAYOUT_split_3x6_3( // Programming symbols. Right U, I, O: switch to screen left, middle, right
   //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
       KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,  LGUI(KC_E),  LGUI(KC_W),  LGUI(KC_R),  KC_TRNS, KC_TRNS,
   //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+    // Toggle combos
       CM_TOGG,    KC_TRNS,     KC_TRNS,     KC_LPRN,     KC_LCBR,     KC_LBRC,                        KC_RBRC,  KC_RCBR,     KC_RPRN,     KC_NUHS,     KC_TRNS, KC_TRNS,
   //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
       KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_GRV,      KC_MINS,     KC_UNDS,                        KC_EQL,   KC_PLUS,     KC_LT,       KC_GT,       KC_TRNS, KC_TRNS,
@@ -74,6 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                          KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
                                                     //`----------------------------------' `--------------------------------'
   ),
+
 
     [3] = LAYOUT_split_3x6_3( // Boot, Sleep, media control
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -122,6 +130,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----------+------------+------------+------------+------------+-----------+---------| |--------+---------+------------+------------+---------+--------+--------|
                                                          KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
                                                     //`----------------------------------' `--------------------------------'
+  ),
+
+    [7] = LAYOUT_split_3x6_3( // Macros
+  //,--------------------------------------------------------------------------.                    ,-------------------------------------------------------------------.
+      KC_TRNS,    KC_TRNS,     MAC_SES_SW,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------|                    |---------+------------+------------+------------+---------+--------|
+      KC_TRNS,    KC_TRNS,     KC_TRNS,     CW_TOGG,     KC_TRNS,     KC_TRNS,                        KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS, KC_TRNS,
+  //|----------+------------+------------+------------+------------+-----------+---------| |--------+---------+------------+------------+---------+--------+--------|
+                                                         KC_TRNS,     TO(0),     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS
+                                                    //`----------------------------------' `--------------------------------'
   )
 
     /* [6] = LAYOUT_split_3x6_3( // Template
@@ -136,6 +156,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     //`----------------------------------' `--------------------------------'
   ) */
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MAC_SES_SW:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("go") "w" SS_LCTL("g"));
+                layer_invert(7);
+            }
+            return false;
+
+    }
+
+    return true;
+}
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
